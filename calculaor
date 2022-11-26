@@ -1,0 +1,36 @@
+import inquirer from "inquirer";
+import Choice from "inquirer/lib/objects/choice.js";
+import Choices from "inquirer/lib/objects/choices.js";
+import chalk from "chalk";
+import chalkAnimation from "chalk-animation";
+
+async function askQuestion() {
+    inquirer.prompt([{
+        //Ask Questions
+        name:"number1",
+        type:"number",
+        message:"Enter number 1"
+    },
+    {
+        //Ask Questions
+        name:"number2",
+        type:"number",
+        message:"Enter number 2"
+    },
+    {
+        name :"operator",
+        type: "list",
+        message : "Which Operation you want to perform? ",
+        choices : [`Addition`,`Subtraction`,`Multiplication`,`Division`]
+    }])
+    .then((answers)=>{
+        //User feedback 
+        if(answers.operator == "Addition"){console.log(`${answers.number1} + ${answers.number2} = ${answers.number1+answers.number2}`)}
+        else if(answers.operator == "Subtraction"){console.log(`${answers.number1} - ${answers.number2} = ${answers.number1-answers.number2}`)}
+        else if(answers.operator == "Multiplication"){console.log(`${answers.number1} * ${answers.number2} = ${answers.number1*answers.number2}`)}
+        else if(answers.operator == "Division"){console.log(`${answers.number1} / ${answers.number2} = ${answers.number1/answers.number2}`)}
+
+    })
+}
+
+askQuestion()
