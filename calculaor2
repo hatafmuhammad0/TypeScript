@@ -1,0 +1,51 @@
+import inquirer from "inquirer";
+import chalk from "chalk";
+import chalkAnimation from "chalk-animation"
+import Choices from "inquirer/lib/objects/choices.js";
+
+
+async function calculator() {
+    //get questions from user using console
+    let questions = await inquirer.prompt([{
+        name: "operator",
+        type: "list",
+        message: chalk.bgBlackBright("Select Operator using Arrow Key!"),
+        choices: ['addition','subtraction','multiplication','division']
+    },{
+        name : "value1",
+        type : "number",
+        message : chalk.bgCyan("Type any number value 1?")
+    },
+    {
+        name : "value2",
+        type: "number",
+        message :chalk.bgCyan("Type any number value 2?")
+    }])
+
+    
+    if(questions.operator == "addition"){
+        console.log(`${questions.value1} + ${questions.value2} = ${questions.value1 + questions.value2}`)
+    }
+    else if(questions.operator == "subtraction"){
+        console.log(`${questions.value1} - ${questions.value2} = ${questions.value1 - questions.value2}`)
+    }
+    else if(questions.operator == "multiplication"){
+        console.log(`${questions.value1} * ${questions.value2} = ${questions.value1 * questions.value2}`)
+    }
+    else if(questions.operator == "division"){
+        console.log(`${questions.value1} / ${questions.value2} = ${questions.value1 / questions.value2}`)
+}}
+
+async function calculationPerform(){
+    do{
+        await calculator();
+        var gamePlay = await inquirer.prompt([{
+            name: "PlayAgain",
+            type : "list",
+            message :chalk.red("Do u want to play again?"),
+            choices: ['Yes','No'],
+        }])
+    }while(gamePlay.PlayAgain == "Yes")
+}
+
+calculationPerform()
